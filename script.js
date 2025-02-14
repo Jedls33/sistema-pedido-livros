@@ -131,7 +131,7 @@ function enviarParaWhatsApp() {
     const numeroTelefone = "5599988168402"; // Exemplo: +55 85 99999-9999
 
     // Criar o link do WhatsApp
-    const linkWhatsApp = `https://wa.me/${5599988168402}?text=${SegueMeuPedido}`;
+    const linkWhatsApp = `https://wa.me/5599988168402?text=Olá,%20segue%20meu%20pedido%20de%20livros`;
 
     // Abrir o link no navegador
     window.open(linkWhatsApp, "_blank");
