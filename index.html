@@ -13,6 +13,9 @@
             <label for="nomeCliente">Nome do Cliente:</label>
             <input type="text" id="nomeCliente" required>
 
+            <label for="telefoneCliente">Telefone do Cliente:</label>
+            <input type="tel" id="telefoneCliente" placeholder="(XX) XXXXX-XXXX" required>
+
             <label for="disciplina">Disciplina:</label>
             <select id="disciplina" required>
                 <option value="">Selecione</option>
@@ -63,6 +66,8 @@
         </table>
 
         <h3>Valor Final do Pedido: R$ <span id="valorFinal">0.00</span></h3>
+
+        <button id="enviarWhatsApp" onclick="enviarParaWhatsApp()">Enviar Pedido para WhatsApp</button>
     </div>
 
     <script src="script.js"></script>
