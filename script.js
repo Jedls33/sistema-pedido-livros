@@ -1,4 +1,4 @@
-// Preços unitários baseados no arquivo fornecido
+// Preços unitários baseados no arquivo PDF fornecido
 const precos = {
     "KIT-A": {
         "2 Anos": 42.20,
@@ -77,18 +77,20 @@ function adicionarItem() {
         <td>${disciplina}</td>
         <td>${serie}</td>
         <td>${quantidade}</td>
-        <td>${precoUnitario.toFixed(2)}</td>
-        <td>${valorTotal.toFixed(2)}</td>
+        <td>${precoUnitario.toFixed(2).replace(".", ",")}</td>
+        <td>${valorTotal.toFixed(2).replace(".", ",")}</td>
     `;
 
     tabela.appendChild(linha);
 
-    document.getElementById("valorFinal").textContent = valorFinal.toFixed(2);
+    document.getElementById("valorFinal").textContent = valorFinal.toFixed(2).replace(".", ",");
 
     // Limpar campos
     document.getElementById("disciplina").value = "";
     document.getElementById("serie").value = "";
     document.getElementById("quantidade").value = "";
+
+    console.log("Itens na tabela:", document.querySelector("#resumoPedido tbody").rows); // Depuração
 }
 
 function enviarParaWhatsApp() {
@@ -101,7 +103,7 @@ function enviarParaWhatsApp() {
     const nomeCliente = document.getElementById("nomeCliente").value || "Cliente";
     const telefoneCliente = document.getElementById("telefoneCliente").value || "Não informado";
 
-    let mensagem = `PEDIDO DE LIVROS\n\nNome do Cliente: ${nomeCliente}\nTelefone: ${telefoneCliente}\n\nItens do Pedido:\n`;
+    let mensagem = `Olá, segue meu pedido de livros\n\nNome do Cliente: ${nomeCliente}\nTelefone: ${telefoneCliente}\n\nItens do Pedido:\n`;
 
     const linhas = tabela.rows;
     for (let i = 0; i < linhas.length; i++) {
@@ -120,9 +122,9 @@ function enviarParaWhatsApp() {
     console.log("Mensagem gerada:", mensagem); // Depuração
 
     const mensagemCodificada = encodeURIComponent(mensagem);
-    const numeroTelefone = "5599988168402"; // Substitua pelo seu número
+    const numeroTelefone = "5599988168402"; // Seu número de telefone
 
-    const linkWhatsApp = `https://wa.me/5599988168402?text=Olá,%20segue%20meu%20pedido%20de%20livros`;
+    const linkWhatsApp = `https://wa.me/${numeroTelefone}?text=${mensagemCodificada}`;
     console.log("Link do WhatsApp:", linkWhatsApp); // Depuração
 
     window.open(linkWhatsApp, "_blank");
