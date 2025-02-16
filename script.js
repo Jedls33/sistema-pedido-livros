@@ -52,29 +52,24 @@ const precos = {
 let valorFinal = 0;
 
 function adicionarItem() {
-    // Obter valores dos campos
     const disciplina = document.getElementById("disciplina").value;
     const serie = document.getElementById("serie").value;
     const quantidade = parseInt(document.getElementById("quantidade").value);
 
-    // Validar campos
     if (!disciplina || !serie || isNaN(quantidade) || quantidade <= 0) {
         alert("Preencha todos os campos corretamente.");
         return;
     }
 
-    // Verificar se a combinação de Disciplina e Série é válida
     const precoUnitario = precos[disciplina]?.[serie];
     if (!precoUnitario) {
         alert("Combinação de Disciplina e Série inválida.");
         return;
     }
 
-    // Calcular o valor total do item
     const valorTotal = quantidade * precoUnitario;
     valorFinal += valorTotal;
 
-    // Adicionar o item à tabela
     const tabela = document.querySelector("#resumoPedido tbody");
     const linha = document.createElement("tr");
 
@@ -88,7 +83,6 @@ function adicionarItem() {
 
     tabela.appendChild(linha);
 
-    // Atualizar o valor final na tela
     document.getElementById("valorFinal").textContent = valorFinal.toFixed(2);
 
     // Limpar campos
@@ -98,23 +92,17 @@ function adicionarItem() {
 }
 
 function enviarParaWhatsApp() {
-    // Verificar se há itens no pedido
     const tabela = document.querySelector("#resumoPedido tbody");
     if (tabela.rows.length === 0) {
         alert("Adicione itens ao pedido antes de enviar.");
         return;
     }
 
-    // Nome do cliente
     const nomeCliente = document.getElementById("nomeCliente").value || "Cliente";
-
-    // Número de telefone do cliente
     const telefoneCliente = document.getElementById("telefoneCliente").value || "Não informado";
 
-    // Montar a mensagem
     let mensagem = `PEDIDO DE LIVROS\n\nNome do Cliente: ${nomeCliente}\nTelefone: ${telefoneCliente}\n\nItens do Pedido:\n`;
 
-    // Adicionar cada item da tabela à mensagem
     const linhas = tabela.rows;
     for (let i = 0; i < linhas.length; i++) {
         const disciplina = linhas[i].cells[0].innerText;
@@ -126,19 +114,12 @@ function enviarParaWhatsApp() {
         mensagem += `${disciplina} - ${serie} - Qtd: ${quantidade} - Valor Unitário: R$${valorUnitario} - Valor Total: R$${valorTotal}\n`;
     }
 
-    // Adicionar o valor final do pedido
     const valorFinal = document.getElementById("valorFinal").innerText;
     mensagem += `\nValor Final do Pedido: R$${valorFinal}`;
 
-    // Codificar a mensagem para URL
     const mensagemCodificada = encodeURIComponent(mensagem);
+    const numeroTelefone = "5599988168402"; // Substitua pelo seu número
 
-    // Número de telefone (substitua pelo seu número)
-    const numeroTelefone = "5599988168402"; // Exemplo: +55 85 99999-9999
-
-    // Criar o link do WhatsApp
     const linkWhatsApp = `https://wa.me/5599988168402?text=Olá,%20segue%20meu%20pedido%20de%20livros`;
-
-    // Abrir o link no navegador
     window.open(linkWhatsApp, "_blank");
 }
