@@ -122,7 +122,7 @@ function enviarParaWhatsApp() {
     const mensagemCodificada = encodeURIComponent(mensagem);
     const numeroTelefone = "5599988168402"; // Substitua pelo seu número
 
-    const linkWhatsApp = `https://wa.me/$5599988168402?text=$OlaSegueMeuPedido`;
+    const linkWhatsApp = `https://wa.me/5599988168402?text=Olá,%20segue%20meu%20pedido%20de%20livros`;
     console.log("Link do WhatsApp:", linkWhatsApp); // Depuração
 
     window.open(linkWhatsApp, "_blank");
